@@ -21,14 +21,13 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["env"],
-            plugins: [
-              "transform-flow-strip-types",              
-              require("babel-plugin-transform-react-jsx"), 
-              require("babel-plugin-transform-class-properties"),
-              require("babel-plugin-transform-object-rest-spread"),
-            ]
-          }
+            plugins: ["@babel/plugin-transform-react-jsx"],
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-flow",
+              "@babel/preset-react",
+            ],
+          },
         }
       }
     ]

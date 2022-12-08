@@ -1,9 +1,9 @@
 // __tests__/CheckboxWithLabel-test.js
 
 import React from 'react';
-import Enzyme,{shallow, mount} from 'enzyme';
+import Enzyme,{ mount } from 'enzyme';
 import {Knob} from '../src/index';
-import Adapter from './ReactSixteenAdapter';
+import Adapter from '@cfaester/enzyme-adapter-react-18';
 import textskin from '../textskin';
 
 Enzyme.configure({ adapter: new Adapter() });
