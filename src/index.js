@@ -11,7 +11,7 @@ import { SvgLoader, SvgProxy } from "react-svgmt";
 import defaultSkin from "./knobdefaultskin";
 import { KnobVisualHelpers } from "./helpers/KnobVisualHelpers";
 import InternalInput from "./InternalInput";
-import { select, event } from "d3-selection";
+import { select } from "d3-selection";
 import type { Selection } from "d3-selection";
 import { drag } from "d3-drag";
 import { scaleLinear } from "d3-scale";
@@ -223,7 +223,7 @@ class Knob extends Component<KnobProps, KnobState> {
     const cx = vbox.width / 2;
     const cy = vbox.height / 2;
 
-    function started() {
+    function started(event) {
       let value = self.getValue();
       const initialAngle = self.convertValueToAngle(value);
       vbox = elem.node().getBoundingClientRect();
@@ -237,7 +237,6 @@ class Knob extends Component<KnobProps, KnobState> {
       let startAngle = utils.getAngleForPoint(startPos.x, startPos.y);
       let lastPos = startPos;
       let lastAngle = utils.getAngleForPoint(lastPos.x, lastPos.y);
-
       //in precise mode, we won't monitor angle change unless the distance > unlockDistance
       let monitoring = false;
       self.setState({
@@ -245,12 +244,12 @@ class Knob extends Component<KnobProps, KnobState> {
         dragging: true,
         dragDistance: 0,
         mousePos: {
-          x: event.sourceEvent.clientX,
-          y: event.sourceEvent.clientY
+          x: event.target.clientX,
+          y: event.target.clientY
         }
       });
 
-      function dragged() {
+      function dragged(event) {
         let currentPos = { x: event.x - cx, y: event.y - cy };
         const distanceFromCenter = Math.sqrt(
           Math.pow(currentPos.x, 2) + Math.pow(currentPos.y, 2)
